@@ -11,25 +11,13 @@ library(ggplot2)
 
 echo = TRUE  
 options(scipen = 1)  
-projectDir="C:/Downloads/Courses/JohnHopkins/ReproducibleResearch/Week1/project"
-setwd(projectDir)
 #####
 unzip("activity.zip")
-```
-
-```
-## Warning in unzip("activity.zip"): error 1 in extracting from zip file
-```
-
-```r
 ####
 activity<- read.csv("activity.csv", sep=",",header=TRUE, colClasses = c("integer", "Date", "factor"))
 activity$month <- as.numeric(format(activity$date, "%m"))
 activity$interval<-as.numeric(activity$interval)
 activity$date <- as.Date(activity$date) 
-
-noNA <- na.omit(activity)
-rownames(noNA) <- 1:nrow(noNA)
 ```
 
 ## What is mean total number of steps taken per day?
@@ -180,19 +168,15 @@ median(totalStepsNew$steps)
 } 
 #filledActivityTable$date <- as.Date(filledActivityTable$date) 
 filledActivityTable$day <- sapply(filledActivityTable$date, FUN=weekday.or.weekend) 
-
+```
 #
 # Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
 #
-library(ggplot2) 
-plot.new()
-```
-
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)
 
 ```r
+library(ggplot2) 
 avgs <- aggregate(x=list(steps=filledActivityTable$steps), by=list(interval=filledActivityTable$interval,filledActivityTable$day), 
-                      FUN=mean, na.rm=TRUE)
+                      FUN=mean, na.rm=TRUE);
  
 ggplot(avgs, aes(interval, steps)) + 
     geom_line(position=position_dodge(0)) +
@@ -207,11 +191,7 @@ ggplot(avgs, aes(interval, steps)) +
 ## ymax not defined: adjusting position using y instead
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-2.png)
-
-```r
-##
-```
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)
 Yes. Looking at the graphs we can say that there is a variation in the activities between weekdays and weekends
 ## 
 

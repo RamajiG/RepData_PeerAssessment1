@@ -15,8 +15,6 @@ library(ggplot2)
 
 echo = TRUE  
 options(scipen = 1)  
-projectDir="C:/Downloads/Courses/JohnHopkins/ReproducibleResearch/Week1/project"
-setwd(projectDir)
 #####
 unzip("activity.zip")
 ####
@@ -24,9 +22,6 @@ activity<- read.csv("activity.csv", sep=",",header=TRUE, colClasses = c("integer
 activity$month <- as.numeric(format(activity$date, "%m"))
 activity$interval<-as.numeric(activity$interval)
 activity$date <- as.Date(activity$date) 
-
-noNA <- na.omit(activity)
-rownames(noNA) <- 1:nrow(noNA)
 ```
 
 ## What is mean total number of steps taken per day?
@@ -130,9 +125,8 @@ filledActivityTable$day <- sapply(filledActivityTable$date, FUN=weekday.or.weeke
 #
 ```{r}
 library(ggplot2) 
-plot.new()
 avgs <- aggregate(x=list(steps=filledActivityTable$steps), by=list(interval=filledActivityTable$interval,filledActivityTable$day), 
-                      FUN=mean, na.rm=TRUE)
+                      FUN=mean, na.rm=TRUE);
  
 ggplot(avgs, aes(interval, steps)) + 
     geom_line(position=position_dodge(0)) +
@@ -140,7 +134,6 @@ ggplot(avgs, aes(interval, steps)) +
     theme(strip.background = element_rect(colour="red", fill="#CCCCFF"))+
     xlab("5-minute interval") + 
     ylab("Average number of steps taken") 
-##
 ```
 Yes. Looking at the graphs we can say that there is a variation in the activities between weekdays and weekends
 ## 
