@@ -121,7 +121,7 @@ filledActivityTable$day <- sapply(filledActivityTable$date, FUN=weekday.or.weeke
 
 ```
 #
-# Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
+## Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
 #
 ```{r}
 library(ggplot2) 
@@ -135,6 +135,7 @@ ggplot(avgs, aes(interval, steps)) +
     xlab("5-minute interval") + 
     ylab("Average number of steps taken") 
 ```
+##
 Yes. Looking at the graphs we can say that there is a variation in the activities between weekdays and weekends
 ## 
 
